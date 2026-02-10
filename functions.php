@@ -189,7 +189,7 @@ function get_initials_avatar($name, $size = 60) {
     $colors = [
         '#4f46e5', '#7c3aed', '#ec4899', '#e11d48', 
         '#f97316', '#eab308', '#059669', '#0284c7',
-        '#6366f1', '#0d9488', '#d97706', '#e11d48'
+        '#6366f1', '#0d9488', '#d97706', '#a855f7'
     ];
     $colorIndex = array_sum(array_map('ord', str_split($name))) % count($colors);
     $bgColor = $colors[$colorIndex];

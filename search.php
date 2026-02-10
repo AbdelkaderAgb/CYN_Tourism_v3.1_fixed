@@ -125,7 +125,7 @@ function getTypeInfo($type) {
         'voucher' => ['label' => 'Transfer Voucher', 'icon' => 'fa-ticket-alt', 'color' => '#4f46e5', 'link' => 'view-transfer.php?id='],
         'hotel_voucher' => ['label' => 'Otel Voucher', 'icon' => 'fa-hotel', 'color' => '#7c3aed', 'link' => 'view-hotel.php?id='],
         'invoice' => ['label' => 'Fatura', 'icon' => 'fa-file-invoice-dollar', 'color' => '#059669', 'link' => 'view-invoice.php?id='],
-        'tour_voucher' => ['label' => 'Tur Voucher', 'icon' => 'fa-route', 'color' => '#059669', 'link' => 'view-tour.php?id='],
+        'tour_voucher' => ['label' => 'Tur Voucher', 'icon' => 'fa-route', 'color' => '#7c3aed', 'link' => 'view-tour.php?id='],
         'company' => ['label' => 'Sirket', 'icon' => 'fa-building', 'color' => '#64748b', 'link' => 'partners.php?search=']
     ];
     return $types[$type] ?? ['label' => 'Bilinmiyor', 'icon' => 'fa-question', 'color' => '#94a3b8', 'link' => '#'];
