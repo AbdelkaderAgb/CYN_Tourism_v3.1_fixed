@@ -9,15 +9,15 @@
  * @version 2.0.0
  */
 
-// Prevent direct access
-if (!defined('APP_ROOT') && basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
+// Prevent direct access (skip this check for CLI)
+if (PHP_SAPI !== 'cli' && !defined('APP_ROOT') && basename($_SERVER['PHP_SELF']) === basename(__FILE__)) {
     header('HTTP/1.1 403 Forbidden');
     exit('Direct access to this file is not allowed.');
 }
 
-// Define application root
+// Define application root if not already defined
 if (!defined('APP_ROOT')) {
-    define('APP_ROOT', __DIR__);
+    define('APP_ROOT', dirname(__DIR__));
 }
 
 // =============================================================================
