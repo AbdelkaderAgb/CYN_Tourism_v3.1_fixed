@@ -26,6 +26,7 @@ $pageTitle = __e('page_not_found', 'Page Not Found');
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 - <?php echo htmlspecialchars($pageTitle); ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -34,21 +35,21 @@ $pageTitle = __e('page_not_found', 'Page Not Found');
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: #1e293b;
         }
         
         .error-container {
             background: white;
-            border-radius: 20px;
+            border-radius: 1rem;
             padding: 60px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 40px rgba(79, 70, 229, 0.1);
             max-width: 500px;
             width: 90%;
         }
@@ -56,22 +57,24 @@ $pageTitle = __e('page_not_found', 'Page Not Found');
         .error-code {
             font-size: 120px;
             font-weight: 700;
-            color: #667eea;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .error-title {
             font-size: 28px;
             font-weight: 600;
-            color: #333;
+            color: #1e293b;
             margin-bottom: 15px;
         }
         
         .error-message {
             font-size: 16px;
-            color: #666;
+            color: #64748b;
             margin-bottom: 30px;
             line-height: 1.6;
         }
@@ -88,33 +91,32 @@ $pageTitle = __e('page_not_found', 'Page Not Found');
             align-items: center;
             gap: 8px;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             border: none;
             cursor: pointer;
             font-size: 14px;
         }
         
         .btn-primary {
-            background: #667eea;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             color: white;
         }
         
         .btn-primary:hover {
-            background: #5a6fd6;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
         }
         
         .btn-secondary {
-            background: #f3f4f6;
-            color: #333;
+            background: #f1f5f9;
+            color: #1e293b;
         }
         
         .btn-secondary:hover {
-            background: #e5e7eb;
+            background: #e2e8f0;
         }
         
         .error-icon {

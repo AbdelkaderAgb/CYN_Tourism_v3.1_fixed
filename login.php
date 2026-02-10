@@ -70,7 +70,7 @@ $currentLang = getCurrentLang();
     <link rel="stylesheet" href="style.css">
     <style>
         body {
-            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 50%, #c7d2fe 100%);
             min-height: 100vh;
             min-height: 100dvh;
             display: flex;
@@ -85,7 +85,7 @@ $currentLang = getCurrentLang();
             border-radius: var(--radius-lg);
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto var(--space-4); color: #fff; font-size: 28px;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
         }
         .login-header { text-align: center; margin-bottom: var(--space-6); }
         @media (max-width: 480px) {
@@ -155,7 +155,7 @@ $currentLang = getCurrentLang();
             </div>
         </div>
         
-        <p class="text-center mt-6" style="color: rgba(255,255,255,0.6); font-size: var(--text-xs);">
+        <p class="text-center mt-6" style="color: var(--text-tertiary); font-size: var(--text-xs);">
             &copy; <?php echo date('Y'); ?> <?php echo COMPANY_NAME; ?><br>
             <span style="opacity: 0.8;">TURSAB License No: 11738</span>
         </p>
