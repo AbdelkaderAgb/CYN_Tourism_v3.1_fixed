@@ -1,34 +1,49 @@
 # CYN Tourism Management System - Architecture Guide
 
-## Version 3.0 - Improved Design
+## Version 3.1 - Modern Stack Migration
+
+### Technology Stack
+
+| Layer | Technology | Notes |
+|-------|-----------|-------|
+| **Frontend** | Tailwind CSS (CDN) | Buildless setup for shared hosting |
+| **Interactivity** | Alpine.js (CDN) | Replaces jQuery for UI interactions |
+| **Backend** | PHP 8.2+ | PDO prepared statements throughout |
+| **Database** | MySQL via PDO | Singleton pattern, secure queries |
+| **Architecture** | MVC | Laravel-inspired, native PHP |
+| **Hosting** | Namecheap cPanel | Apache + mod_rewrite |
 
 ### Directory Structure
 
 ```
 CYN_Tourism_v3.1_fixed/
-├── app/
-│   ├── Controllers/      # Business logic controllers (MVC pattern)
-│   │   ├── BaseController.php
-│   │   └── VoucherController.php
-│   ├── Models/           # Data Access Layer (DAL)
-│   │   ├── BaseModel.php
-│   │   ├── Database.php
-│   │   ├── UserModel.php
-│   │   └── VoucherModel.php
-│   ├── Services/         # Business services
-│   │   ├── Auth.php
-│   │   └── Logger.php
-│   ├── Views/            # Presentation layer (future)
-│   └── bootstrap.php     # Application initialization
-├── config/               # Configuration files
+├── public/                # Front controller & .htaccess (new MVC entry)
+│   ├── index.php          # Router-based front controller
+│   └── .htaccess          # Apache URL rewriting
+├── src/                   # New MVC source (PSR-4: CYN\)
+│   ├── Controllers/       # New namespaced controllers
+│   │   └── DashboardController.php
+│   └── Router.php         # Clean URL router
+├── views/                 # Tailwind CSS + Alpine.js views
+│   ├── layouts/           # Shared layout templates
+│   │   ├── header.php     # Tailwind sidebar + top bar + Alpine.js
+│   │   └── footer.php     # Toast notifications + scripts
+│   ├── pages/             # Page-specific views
+│   │   └── dashboard.php  # Dashboard stats grid + table
+│   └── partials/          # Reusable components (future)
+├── app/                   # Legacy MVC structure (v3.0)
+│   ├── Controllers/       # Legacy controllers
+│   ├── Models/            # Data Access Layer (DAL)
+│   ├── Services/          # Auth, Logger services
+│   └── bootstrap.php      # Legacy app initialization
+├── config/                # Configuration files
 │   ├── config.php
 │   └── email-config.php
-├── public/               # Publicly accessible files (future)
-├── storage/              # Application storage
+├── storage/               # Application storage
 │   ├── logs/
 │   ├── cache/
 │   └── uploads/
-└── [legacy files]        # Original files for backward compatibility
+└── [legacy files]         # Root-level PHP files (backward compatible)
 ```
 
 ### Key Improvements
@@ -74,22 +89,33 @@ CYN_Tourism_v3.1_fixed/
 
 The new architecture is designed for **gradual migration**:
 
-1. **Phase 1** (Current): Core infrastructure
+1. **Phase 1** (Completed): Core infrastructure
    - ✅ Directory structure created
-   - ✅ BaseModel and specific models
+   - ✅ BaseModel and specific models (PDO prepared statements)
    - ✅ BaseController pattern
    - ✅ Bootstrap autoloader
    - ✅ Backward compatibility maintained
 
-2. **Phase 2** (Next): Controller migration
-   - Migrate consolidated-* files to controllers
-   - Create specific controllers for each feature
-   - Maintain legacy file compatibility
+2. **Phase 2** (Completed): Frontend modernization
+   - ✅ Tailwind CSS via CDN replaces custom style.css
+   - ✅ Alpine.js replaces inline JavaScript for interactivity
+   - ✅ Dark mode toggle with Alpine.js + Tailwind `dark:` classes
+   - ✅ Responsive sidebar with Alpine.js state management
+   - ✅ Dashboard page fully converted to new stack
+   - ✅ Login page fully converted to Tailwind + Alpine.js
 
-3. **Phase 3** (Future): View separation
-   - Extract HTML from PHP logic files
-   - Create view templates
-   - Implement view rendering engine
+3. **Phase 3** (Completed): MVC Router & Views
+   - ✅ `src/Router.php` for clean URL routing
+   - ✅ `src/Controllers/DashboardController.php` with namespaced MVC
+   - ✅ `public/index.php` front controller with PSR-4 autoloader
+   - ✅ `views/layouts/` for shared header/footer
+   - ✅ `views/pages/` for page-specific views
+   - ✅ Legacy header.php/footer.php delegate to new views
+
+4. **Phase 4** (Future): Complete migration
+   - Migrate remaining pages to Tailwind views
+   - Create specific controllers for each feature module
+   - Add comprehensive view partials/components
 
 ### Backward Compatibility
 
