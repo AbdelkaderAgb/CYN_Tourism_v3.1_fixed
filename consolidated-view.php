@@ -18,7 +18,7 @@ if (!$id) { header('Location: index.php'); exit; }
 $data = null;
 $title = '';
 $page = '';
-$docColor = '#3b82f6';
+$docColor = '#4f46e5';
 $docIcon = 'fa-file-alt';
 $docNumber = '';
 
@@ -28,7 +28,7 @@ try {
             $data = Database::getInstance()->fetchOne("SELECT * FROM vouchers WHERE id = ?", [$id]);
             $title = __('transfer_details') ?: 'Transfer Detayı';
             $page = 'transfers';
-            $docColor = '#3b82f6';
+            $docColor = '#4f46e5';
             $docIcon = 'fa-shuttle-van';
             $docNumber = $data['voucher_no'] ?? '';
             break;
@@ -36,7 +36,7 @@ try {
             $data = Database::getInstance()->fetchOne("SELECT * FROM tours WHERE id = ?", [$id]);
             $title = __('tour_details') ?: 'Tur Detayı';
             $page = 'tours';
-            $docColor = '#10b981';
+            $docColor = '#059669';
             $docIcon = 'fa-map-signs';
             $docNumber = 'TV-' . str_pad($id, 4, '0', STR_PAD_LEFT);
             break;
@@ -44,7 +44,7 @@ try {
             $data = Database::getInstance()->fetchOne("SELECT * FROM hotel_vouchers WHERE id = ?", [$id]);
             $title = __('hotel_details') ?: 'Otel Detayı';
             $page = 'hotels';
-            $docColor = '#8b5cf6';
+            $docColor = '#7c3aed';
             $docIcon = 'fa-hotel';
             $docNumber = 'HV-' . str_pad($id, 4, '0', STR_PAD_LEFT);
             break;
@@ -52,7 +52,7 @@ try {
             $data = Database::getInstance()->fetchOne("SELECT * FROM invoices WHERE id = ?", [$id]);
             $title = __('invoice_details') ?: 'Fatura Detayı';
             $page = 'invoices';
-            $docColor = '#3b82f6';
+            $docColor = '#4f46e5';
             $docIcon = 'fa-file-invoice-dollar';
             $docNumber = $data['invoice_no'] ?? '';
             break;
@@ -133,7 +133,7 @@ include __DIR__ . '/header.php';
 </div>
 
 <?php if (isset($_GET['saved'])): ?>
-<div class="alert alert-success" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-5);border-radius:var(--radius);background:rgba(16,185,129,0.1);color:#065f46;border:1px solid rgba(16,185,129,0.2);display:flex;align-items:center;gap:8px;">
+<div class="alert alert-success" style="margin-bottom:var(--space-4);padding:var(--space-3) var(--space-5);border-radius:var(--radius);background:rgba(5,150,105,0.1);color:#065f46;border:1px solid rgba(5,150,105,0.2);display:flex;align-items:center;gap:8px;">
     <i class="fas fa-check-circle"></i> Kayıt başarıyla güncellendi.
 </div>
 <?php endif; ?>
@@ -348,8 +348,8 @@ include __DIR__ . '/header.php';
         <i class="fas fa-ellipsis-v"></i>
     </button>
     <div class="fab-menu">
-        <a href="export.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>&format=pdf" class="fab-item" target="_blank" style="background:#ef4444;"><i class="fas fa-file-pdf"></i></a>
-        <a href="export.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>&format=excel" class="fab-item" style="background:#10b981;"><i class="fas fa-file-excel"></i></a>
+        <a href="export.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>&format=pdf" class="fab-item" target="_blank" style="background:#e11d48;"><i class="fas fa-file-pdf"></i></a>
+        <a href="export.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>&format=excel" class="fab-item" style="background:#059669;"><i class="fas fa-file-excel"></i></a>
         <a href="edit.php?type=<?php echo $type; ?>&id=<?php echo $id; ?>" class="fab-item" style="background:<?php echo $docColor; ?>;"><i class="fas fa-edit"></i></a>
     </div>
 </div>
@@ -357,17 +357,17 @@ include __DIR__ . '/header.php';
 <style>
 /* View-specific styles */
 .view-layout { max-width: 900px; animation: fadeInUp 0.4s ease; }
-.view-card { margin-bottom: var(--space-4); }
+.view-card { margin-bottom: var(--space-4); border-radius: var(--radius-lg); }
 .view-card:hover { transform: none; }
 .view-card .card-header h3 { font-size: var(--text-base); display: flex; align-items: center; gap: 8px; margin: 0; }
 
 .view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
-.view-field { padding: 14px 0; border-bottom: 1px solid var(--border-light); padding-right: 16px; }
+.view-field { padding: 16px 0; border-bottom: 1px solid var(--border-light); padding-right: 16px; }
 .view-field:nth-child(odd) { padding-right: 24px; }
 .view-field:nth-child(even) { padding-left: 24px; border-left: 1px solid var(--border-light); }
 .view-field:nth-last-child(-n+2) { border-bottom: none; }
 .view-field.view-full { grid-column: 1 / -1; border-left: none !important; padding-left: 0 !important; }
-.view-label { display: block; font-size: var(--text-xs); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+.view-label { display: block; font-size: var(--text-xs); font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
 .view-value { display: block; font-size: var(--text-base); font-weight: 500; color: var(--text-primary); }
 .view-value.view-mono { font-family: 'JetBrains Mono', monospace; }
 .view-value.view-highlight { color: var(--primary); font-weight: 700; }
@@ -376,16 +376,16 @@ include __DIR__ . '/header.php';
 /* Route Display */
 .route-display { display: flex; align-items: stretch; gap: 20px; padding: 8px 0; }
 .route-from, .route-to { flex: 1; display: flex; gap: 12px; }
-.route-icon { width: 40px; height: 40px; border-radius: var(--radius); background: rgba(239, 68, 68, 0.1); color: #ef4444; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: var(--text-base); }
-.route-connector { display: flex; align-items: center; color: var(--text-tertiary); font-size: 1.5rem; flex-shrink: 0; }
+.route-icon { width: 44px; height: 44px; border-radius: var(--radius-md); background: rgba(79, 70, 229, 0.08); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: var(--text-base); }
+.route-connector { display: flex; align-items: center; color: var(--primary); font-size: 1.5rem; flex-shrink: 0; }
 
 /* Total Box */
-.view-total-box { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; background: var(--bg-tertiary); border-radius: var(--radius); }
+.view-total-box { display: flex; justify-content: space-between; align-items: center; padding: 20px 24px; background: var(--bg-tertiary); border-radius: var(--radius-md); border: 1px solid var(--border-light); }
 .view-total-label { font-size: var(--text-sm); font-weight: 600; color: var(--text-secondary); }
 .view-total-value { font-family: 'JetBrains Mono', monospace; font-size: 1.5rem; font-weight: 700; }
 
 /* Notes */
-.view-notes { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.8; padding: 4px 0; }
+.view-notes { font-size: var(--text-sm); color: var(--text-secondary); line-height: 1.8; padding: 8px 0; border-left: 3px solid var(--primary); padding-left: 16px; }
 
 /* Meta Card */
 .view-meta-card { background: var(--bg-tertiary); border: 1px dashed var(--border-light); }

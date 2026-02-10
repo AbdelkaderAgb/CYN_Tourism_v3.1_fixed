@@ -116,28 +116,28 @@ include __DIR__ . '/header.php';
 <!-- Stats Overview -->
 <div class="grid grid-cols-4" style="margin-bottom: 2rem;">
     <div class="stat-card">
-        <div class="stat-icon primary"><i class="fas fa-exchange-alt"></i></div>
+        <div class="stat-icon blue"><i class="fas fa-exchange-alt"></i></div>
         <div class="stat-content">
             <div class="stat-label">Toplam Transfer</div>
             <div class="stat-value"><?php echo number_format($transferStats['total_transfers'] ?? 0); ?></div>
         </div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon success"><i class="fas fa-users"></i></div>
+        <div class="stat-icon green"><i class="fas fa-users"></i></div>
         <div class="stat-content">
             <div class="stat-label">Toplam Yolcu</div>
             <div class="stat-value"><?php echo number_format($transferStats['total_passengers'] ?? 0); ?></div>
         </div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon warning"><i class="fas fa-building"></i></div>
+        <div class="stat-icon orange"><i class="fas fa-building"></i></div>
         <div class="stat-content">
             <div class="stat-label">Aktif Sirket</div>
             <div class="stat-value"><?php echo number_format($transferStats['unique_companies'] ?? 0); ?></div>
         </div>
     </div>
     <div class="stat-card">
-        <div class="stat-icon danger"><i class="fas fa-hotel"></i></div>
+        <div class="stat-icon purple"><i class="fas fa-hotel"></i></div>
         <div class="stat-content">
             <div class="stat-label">Aktif Otel</div>
             <div class="stat-value"><?php echo number_format($transferStats['unique_hotels'] ?? 0); ?></div>
@@ -273,8 +273,8 @@ new Chart(revenueCtx, {
         datasets: [{
             label: 'Gelir ($)',
             data: <?php echo json_encode(array_column($monthlyRevenue, 'total')); ?>,
-            borderColor: '#6366f1',
-            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+            borderColor: '#4f46e5',
+            backgroundColor: 'rgba(79, 70, 229, 0.08)',
             borderWidth: 2,
             fill: true,
             tension: 0.4
@@ -299,7 +299,7 @@ new Chart(typeCtx, {
         labels: <?php echo json_encode(array_column($transferTypes, 'transfer_type')); ?>,
         datasets: [{
             data: <?php echo json_encode(array_column($transferTypes, 'count')); ?>,
-            backgroundColor: ['#6366f1', '#22c55e', '#f59e0b', '#ef4444', '#8b5cf6'],
+            backgroundColor: ['#4f46e5', '#059669', '#d97706', '#e11d48', '#7c3aed'],
             borderWidth: 0
         }]
     },

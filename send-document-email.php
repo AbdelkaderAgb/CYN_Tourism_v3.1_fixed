@@ -83,22 +83,22 @@ try {
 }
 
 function buildEmailBody($docTitle, $docNumber, $customMessage, $documentUrl, $companyName) {
-    $customSection = $customMessage ? '<p style="background:#f8fafc;padding:16px;border-radius:8px;border-left:4px solid #3b82f6;margin:20px 0">' . nl2br(htmlspecialchars($customMessage)) . '</p>' : '';
+    $customSection = $customMessage ? '<p style="background:#f8fafc;padding:16px;border-radius:8px;border-left:4px solid #4f46e5;margin:20px 0">' . nl2br(htmlspecialchars($customMessage)) . '</p>' : '';
     
     return '<!DOCTYPE html>
 <html>
 <head><meta charset="UTF-8"></head>
 <body style="font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif;line-height:1.6;color:#1e293b;max-width:600px;margin:0 auto;padding:20px">
-<div style="background:linear-gradient(135deg,#3b82f6 0%,#06b6d4 100%);padding:30px;border-radius:12px 12px 0 0;text-align:center">
+<div style="background:linear-gradient(135deg,#4f46e5 0%,#7c3aed 100%);padding:30px;border-radius:12px 12px 0 0;text-align:center">
 <h1 style="color:white;margin:0;font-size:24px">' . htmlspecialchars($companyName) . '</h1>
 </div>
 <div style="background:white;padding:30px;border:1px solid #e2e8f0;border-top:none;border-radius:0 0 12px 12px">
 <h2 style="color:#1e293b;margin-top:0">📄 ' . htmlspecialchars($docTitle) . '</h2>
-<p style="color:#64748b">Belge Numarasi: <strong style="color:#3b82f6;font-family:monospace">' . htmlspecialchars($docNumber) . '</strong></p>
+<p style="color:#64748b">Belge Numarasi: <strong style="color:#4f46e5;font-family:monospace">' . htmlspecialchars($docNumber) . '</strong></p>
 ' . $customSection . '
 <p>Belgenizi goruntulemek veya indirmek icin asagidaki butona tiklayiniz:</p>
 <div style="text-align:center;margin:30px 0">
-<a href="' . htmlspecialchars($documentUrl) . '" style="display:inline-block;background:#3b82f6;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600">Belgeyi Goruntule</a>
+<a href="' . htmlspecialchars($documentUrl) . '" style="display:inline-block;background:#4f46e5;color:white;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:600">Belgeyi Goruntule</a>
 </div>
 <hr style="border:none;border-top:1px solid #e2e8f0;margin:24px 0">
 <p style="color:#94a3b8;font-size:12px;text-align:center;margin:0">

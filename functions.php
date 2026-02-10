@@ -187,9 +187,9 @@ function get_initials_avatar($name, $size = 60) {
     
     // Generate consistent color based on name
     $colors = [
-        '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', 
-        '#f97316', '#eab308', '#22c55e', '#06b6d4',
-        '#3b82f6', '#14b8a6', '#f59e0b', '#ef4444'
+        '#4f46e5', '#7c3aed', '#ec4899', '#e11d48', 
+        '#f97316', '#eab308', '#059669', '#0284c7',
+        '#6366f1', '#0d9488', '#d97706', '#e11d48'
     ];
     $colorIndex = array_sum(array_map('ord', str_split($name))) % count($colors);
     $bgColor = $colors[$colorIndex];
