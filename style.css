@@ -1,6 +1,7 @@
 /**
- * CYN Tourism - Modern Design System v3.0
+ * CYN Tourism - Modern Design System v3.1
  * Enhanced UI/UX with Professional Financial Minimalism
+ * Fully Responsive Design for All Devices
  * WCAG 2.1 AA Compliant
  */
 
@@ -396,6 +397,16 @@ a:hover {
 
 .d-flex {
     display: flex;
+}
+
+.d-lg-flex {
+    display: none;
+}
+
+@media (min-width: 1025px) {
+    .d-lg-flex {
+        display: flex;
+    }
 }
 
 .w-full {
@@ -1204,17 +1215,37 @@ textarea.form-control {
     background: rgba(59, 130, 246, 0.1);
 }
 
+.sidebar-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 299;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity var(--transition-slow), visibility var(--transition-slow);
+}
+
+.sidebar-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
 .sidebar {
     width: var(--sidebar-width);
     background: var(--bg-primary);
     border-right: 1px solid var(--border-light);
     height: 100vh;
+    height: 100dvh;
     position: fixed;
     left: 0;
     top: 0;
     overflow-y: auto;
+    overflow-x: hidden;
     z-index: 300;
     transition: all var(--transition-slow);
+    -webkit-overflow-scrolling: touch;
 }
 
 .sidebar.collapsed {
@@ -1347,6 +1378,7 @@ textarea.form-control {
 .main-content {
     margin-left: var(--sidebar-width);
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     transition: margin-left var(--transition-slow);
@@ -1395,6 +1427,8 @@ textarea.form-control {
 .search-global {
     position: relative;
     width: 320px;
+    max-width: 100%;
+    transition: width var(--transition);
 }
 
 .search-global input {
@@ -1571,6 +1605,19 @@ textarea.form-control {
     height: 1px;
     background: var(--border-light);
     margin: var(--space-2) 0;
+}
+
+.app-layout {
+    display: flex;
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+.page-content {
+    padding: var(--page-padding);
+    flex: 1;
+    width: 100%;
+    max-width: var(--max-content-width);
 }
 
 .page-header {
@@ -1888,6 +1935,33 @@ textarea.form-control {
     border-width: 2px;
 }
 
+.spinner-lg {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+}
+
+.page-loader {
+    position: fixed;
+    inset: 0;
+    background: var(--bg-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity var(--transition-slow);
+}
+
+.page-loader-content {
+    text-align: center;
+}
+
+.page-loader-text {
+    margin-top: var(--space-4);
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+}
+
 @keyframes spin {
     to {
         transform: rotate(360deg);
@@ -2146,6 +2220,21 @@ footer {
     font-size: var(--text-sm);
 }
 
+/* =====================================================
+   RESPONSIVE DESIGN - Enhanced Breakpoints
+   ===================================================== */
+
+/* Large tablets and small desktops */
+@media (max-width: 1200px) {
+    .search-global {
+        width: 240px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    }
+}
+
 @media (max-width: 1024px) {
     .grid-cols-4 {
         grid-template-columns: repeat(2, 1fr);
@@ -2153,10 +2242,12 @@ footer {
 
     .sidebar {
         transform: translateX(-100%);
+        box-shadow: none;
     }
 
     .sidebar.open {
         transform: translateX(0);
+        box-shadow: var(--shadow-xl);
     }
 
     .main-content {
@@ -2164,11 +2255,29 @@ footer {
     }
 
     .menu-toggle {
-        display: block;
+        display: flex;
+    }
+
+    .search-global {
+        width: 200px;
+    }
+
+    .calendar-day {
+        min-height: 90px;
+    }
+
+    .event-item {
+        font-size: 10px;
+        padding: 2px 4px;
     }
 }
 
+/* Tablets and large phones */
 @media (max-width: 768px) {
+    :root {
+        --page-padding: var(--space-4);
+    }
+
     html {
         font-size: 15px;
     }
@@ -2200,23 +2309,32 @@ footer {
         display: none;
     }
 
+    .top-bar {
+        padding: var(--space-2) var(--space-4);
+    }
+
     .stat-card {
         padding: var(--space-4);
     }
 
-    .stat-icon {
+    .stat-card .stat-icon {
         width: 48px;
         height: 48px;
         font-size: 1.25rem;
     }
 
-    .stat-value {
+    .stat-card .stat-value {
         font-size: var(--text-xl);
     }
 
     .card-header {
         flex-direction: column;
         align-items: flex-start;
+        padding: var(--space-4);
+    }
+
+    .card-body {
+        padding: var(--space-4);
     }
 
     .table-container {
@@ -2231,6 +2349,7 @@ footer {
     .toast-container {
         left: var(--space-4);
         right: var(--space-4);
+        top: var(--space-4);
     }
 
     .toast {
@@ -2245,14 +2364,68 @@ footer {
     .modal-dialog {
         max-width: none;
     }
+
+    .dashboard-card {
+        padding: var(--space-4);
+    }
+
+    .dashboard-card .icon-wrapper {
+        width: 48px;
+        height: 48px;
+        font-size: 1.25rem;
+    }
+
+    .dashboard-card .card-value {
+        font-size: 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: var(--space-4);
+    }
+
+    .breadcrumbs {
+        display: none;
+    }
+
+    .calendar-day {
+        min-height: 70px;
+        padding: var(--space-1);
+    }
+
+    .calendar-day-header {
+        padding: var(--space-2);
+        font-size: var(--text-xs);
+    }
+
+    .day-number {
+        font-size: var(--text-xs);
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .page-header {
+        margin-bottom: var(--space-6);
+    }
+
+    .page-content {
+        padding: var(--space-4);
+    }
 }
 
+/* Small phones */
 @media (max-width: 480px) {
     html {
         font-size: 14px;
     }
 
     .user-dropdown-toggle .user-name {
+        display: none;
+    }
+
+    .user-dropdown-toggle .fa-chevron-down {
         display: none;
     }
 
@@ -2267,6 +2440,100 @@ footer {
     .stat-card {
         flex-direction: column;
         text-align: center;
+    }
+
+    .top-bar-right {
+        gap: var(--space-1);
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+    }
+
+    .language-switcher {
+        padding: 2px;
+    }
+
+    .lang-btn {
+        padding: 2px var(--space-1);
+        font-size: 0.65rem;
+    }
+
+    .table th,
+    .table td {
+        padding: var(--space-3) var(--space-2);
+        font-size: var(--text-xs);
+    }
+
+    .calendar-body {
+        font-size: var(--text-xs);
+    }
+
+    .calendar-day {
+        min-height: 50px;
+    }
+
+    .event-item {
+        font-size: 10px;
+        padding: 1px 3px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .modal-header {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .modal-body {
+        padding: var(--space-4);
+    }
+
+    .modal-footer {
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .sidebar-header {
+        padding: var(--space-4);
+    }
+
+    .sidebar-nav {
+        padding: var(--space-3);
+    }
+
+    .nav-section {
+        margin-bottom: var(--space-4);
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    html {
+        font-size: 13px;
+    }
+
+    .top-bar {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .page-content {
+        padding: var(--space-3);
+    }
+
+    .card-body {
+        padding: var(--space-3);
+    }
+
+    .btn {
+        padding: var(--space-2) var(--space-4);
+        font-size: var(--text-xs);
+    }
+
+    .calendar-day-header {
+        font-size: 0.7rem;
+        padding: var(--space-1);
     }
 }
 
@@ -2362,6 +2629,9 @@ footer {
         padding: var(--space-4);
         border-bottom: 1px solid var(--border-light);
         position: relative;
+        margin-bottom: var(--space-2);
+        background: var(--bg-primary);
+        border-radius: var(--radius);
     }
 
     .table-responsive .table td {
@@ -2578,6 +2848,10 @@ footer {
 @media (max-width: 1024px) {
     .calendar-week {
         grid-template-columns: 1fr;
+    }
+
+    .week-day-events {
+        min-height: 100px;
     }
 }
 
@@ -2948,4 +3222,193 @@ footer {
 .week-event.hotel {
     border-left-color: #8b5cf6;
     background: rgba(139, 92, 246, 0.05);
+}
+
+/* =====================================================
+   TOUCH DEVICE OPTIMIZATIONS
+   ===================================================== */
+@media (hover: none) and (pointer: coarse) {
+    /* Disable hover transforms on touch devices to prevent sticky hover states */
+    .card:hover {
+        transform: none;
+    }
+
+    .dashboard-card:hover {
+        transform: none;
+        box-shadow: var(--shadow);
+    }
+
+    .stat-card:hover {
+        transform: none;
+    }
+
+    .stat-card:hover .stat-icon {
+        transform: none;
+    }
+
+    .btn-primary:hover {
+        transform: none;
+    }
+
+    .event-chip:hover {
+        transform: none;
+    }
+
+    .event-item:hover {
+        transform: none;
+    }
+
+    .day-event-card:hover {
+        transform: none;
+    }
+
+    .week-event:hover {
+        transform: none;
+    }
+
+    /* Ensure minimum tap target sizes (44x44px per WCAG) */
+    .btn {
+        min-height: 44px;
+    }
+
+    .btn-sm {
+        min-height: 44px;
+    }
+
+    .icon-btn {
+        min-width: 44px;
+        min-height: 44px;
+    }
+
+    .nav-item {
+        min-height: 44px;
+        padding: var(--space-3) var(--space-4);
+    }
+
+    .form-check-input {
+        width: 24px;
+        height: 24px;
+        /* Touch target met via padding on .form-check container */
+    }
+
+    .dropdown-item {
+        min-height: 44px;
+    }
+
+    .tab {
+        min-height: 44px;
+    }
+}
+
+/* =====================================================
+   CALENDAR MOBILE RESPONSIVE
+   ===================================================== */
+@media (max-width: 640px) {
+    .calendar-header,
+    .calendar-body {
+        grid-template-columns: repeat(7, 1fr);
+    }
+
+    .calendar-day-header {
+        padding: var(--space-1);
+        font-size: 0.7rem;
+        letter-spacing: 0;
+    }
+
+    .calendar-nav {
+        flex-wrap: wrap;
+        gap: var(--space-2);
+        padding: var(--space-3);
+    }
+
+    .calendar-nav h2 {
+        font-size: var(--text-base);
+        width: 100%;
+        text-align: center;
+        order: -1;
+    }
+
+    .calendar-nav .btn {
+        flex: 1;
+    }
+
+    .event-item,
+    .event-chip {
+        font-size: 10px;
+        padding: 1px 3px;
+        border-left-width: 2px;
+    }
+
+    .more-events {
+        font-size: 10px;
+    }
+
+    /* Day view responsive */
+    .day-event-card {
+        flex-direction: column;
+        gap: var(--space-2);
+    }
+
+    .event-time-display {
+        min-width: auto;
+        font-size: var(--text-base);
+    }
+}
+
+/* =====================================================
+   DARK MODE ENHANCEMENTS
+   ===================================================== */
+[data-theme="dark"] {
+    --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.25);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.25);
+    --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.3);
+}
+
+[data-theme="dark"] .card {
+    border-color: var(--border-light);
+}
+
+[data-theme="dark"] .table-container {
+    border: 1px solid var(--border-light);
+}
+
+[data-theme="dark"] .sidebar {
+    border-right-color: var(--border-light);
+}
+
+[data-theme="dark"] .calendar-day {
+    border-color: var(--border-light);
+}
+
+[data-theme="dark"] .calendar-day.today {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+}
+
+[data-theme="dark"] .calendar-day.has-events {
+    background: rgba(59, 130, 246, 0.05);
+}
+
+[data-theme="dark"] .day-event-card:hover {
+    background: var(--bg-tertiary);
+}
+
+[data-theme="dark"] .event-chip.transfer {
+    background: rgba(59, 130, 246, 0.15);
+    color: #93c5fd;
+}
+
+[data-theme="dark"] .event-chip.tour {
+    background: rgba(16, 185, 129, 0.15);
+    color: #6ee7b7;
+}
+
+[data-theme="dark"] .event-chip.hotel {
+    background: rgba(139, 92, 246, 0.15);
+    color: #c4b5fd;
+}
+
+[data-theme="dark"] .login-container .card {
+    border-color: var(--border-light);
 }
