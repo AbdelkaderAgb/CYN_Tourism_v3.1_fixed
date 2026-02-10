@@ -68,7 +68,8 @@ class UserModel extends BaseModel {
         $query = "UPDATE {$this->table} 
                   SET last_login = NOW(), last_login_ip = ? 
                   WHERE id = ?";
-        return $this->db->execute($query, [$ip, $userId]);
+        $stmt = $this->db->query($query, [$ip, $userId]);
+        return $stmt ? $stmt->rowCount() > 0 : false;
     }
     
     /**
@@ -81,7 +82,8 @@ class UserModel extends BaseModel {
         $query = "UPDATE {$this->table} 
                   SET failed_login_attempts = failed_login_attempts + 1 
                   WHERE id = ?";
-        return $this->db->execute($query, [$userId]);
+        $stmt = $this->db->query($query, [$userId]);
+        return $stmt ? $stmt->rowCount() > 0 : false;
     }
     
     /**
@@ -94,6 +96,7 @@ class UserModel extends BaseModel {
         $query = "UPDATE {$this->table} 
                   SET failed_login_attempts = 0, locked_until = NULL 
                   WHERE id = ?";
-        return $this->db->execute($query, [$userId]);
+        $stmt = $this->db->query($query, [$userId]);
+        return $stmt ? $stmt->rowCount() > 0 : false;
     }
 }

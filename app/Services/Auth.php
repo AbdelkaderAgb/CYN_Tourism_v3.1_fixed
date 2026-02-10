@@ -327,7 +327,12 @@ class Auth {
         self::requireAuth();
         if (!self::isAdmin()) {
             header('HTTP/1.1 403 Forbidden');
-            include __DIR__ . '/403.php';
+            $errorPage = defined('APP_ROOT') ? APP_ROOT . '/403.php' : dirname(__DIR__, 2) . '/403.php';
+            if (file_exists($errorPage)) {
+                include $errorPage;
+            } else {
+                echo 'Access Denied: Admin privileges required.';
+            }
             exit;
         }
     }
@@ -339,7 +344,12 @@ class Auth {
         self::requireAuth();
         if (!self::isManager()) {
             header('HTTP/1.1 403 Forbidden');
-            include __DIR__ . '/403.php';
+            $errorPage = defined('APP_ROOT') ? APP_ROOT . '/403.php' : dirname(__DIR__, 2) . '/403.php';
+            if (file_exists($errorPage)) {
+                include $errorPage;
+            } else {
+                echo 'Access Denied: Manager privileges required.';
+            }
             exit;
         }
     }

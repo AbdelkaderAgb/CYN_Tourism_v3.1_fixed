@@ -4,8 +4,13 @@
  * Configure SMTP and email settings
  */
 
-require_once __DIR__ . "/auth.php";
-require_once __DIR__ . "/functions.php";
+// Define APP_ROOT if not already defined
+if (!defined('APP_ROOT')) {
+    define('APP_ROOT', dirname(__DIR__));
+}
+
+require_once APP_ROOT . "/auth.php";
+require_once APP_ROOT . "/functions.php";
 
 Auth::requireAuth();
 Auth::requireAdmin();
@@ -54,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 $pageTitle = 'Email Ayarlari';
 $activePage = 'settings';
-include __DIR__ . '/header.php';
+include APP_ROOT . '/header.php';
 ?>
 
 <div class="page-header">
@@ -134,4 +139,4 @@ include __DIR__ . '/header.php';
     </div>
 </div>
 
-<?php include __DIR__ . '/footer.php'; ?>
+<?php include APP_ROOT . '/footer.php'; ?>

@@ -10,7 +10,7 @@
 class Logger {
     
     /** @var string Log directory path */
-    private static $logDir = __DIR__ . '/logs/';
+    private static $logDir = null;
     
     /** @var bool Whether logging is enabled */
     private static $enabled = true;
@@ -19,6 +19,17 @@ class Logger {
      * Initialize logger
      */
     private static function init() {
+        // Set log directory using STORAGE_PATH or APP_ROOT if defined
+        if (self::$logDir === null) {
+            if (defined('STORAGE_PATH')) {
+                self::$logDir = STORAGE_PATH . '/logs/';
+            } elseif (defined('APP_ROOT')) {
+                self::$logDir = APP_ROOT . '/logs/';
+            } else {
+                self::$logDir = dirname(__DIR__, 2) . '/logs/';
+            }
+        }
+        
         if (!is_dir(self::$logDir)) {
             @mkdir(self::$logDir, 0755, true);
         }

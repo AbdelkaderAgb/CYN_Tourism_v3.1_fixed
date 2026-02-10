@@ -82,7 +82,8 @@ abstract class BaseModel {
             implode(', ', $placeholders)
         );
         
-        return $this->db->execute($query, $values);
+        $stmt = $this->db->query($query, $values);
+        return $stmt ? $this->db->lastInsertId() : false;
     }
     
     /**
@@ -113,7 +114,8 @@ abstract class BaseModel {
             $this->primaryKey
         );
         
-        return $this->db->execute($query, $values);
+        $stmt = $this->db->query($query, $values);
+        return $stmt ? $stmt->rowCount() > 0 : false;
     }
     
     /**
@@ -124,7 +126,8 @@ abstract class BaseModel {
      */
     public function delete($id) {
         $query = "DELETE FROM {$this->table} WHERE {$this->primaryKey} = ?";
-        return $this->db->execute($query, [$id]);
+        $stmt = $this->db->query($query, [$id]);
+        return $stmt ? $stmt->rowCount() > 0 : false;
     }
     
     /**
