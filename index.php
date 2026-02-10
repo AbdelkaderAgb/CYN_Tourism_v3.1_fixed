@@ -2,9 +2,17 @@
 /**
  * CYN Tourism - Main Entry Point
  * Redirects to appropriate page based on authentication status
+ * 
+ * Version 3.0 - Uses new bootstrap and maintains backward compatibility
  */
 
-require_once __DIR__ . '/auth.php';
+// Load new bootstrap (includes config, autoloader, and core services)
+if (file_exists(__DIR__ . '/app/bootstrap.php')) {
+    require_once __DIR__ . '/app/bootstrap.php';
+} else {
+    // Fallback to legacy loading
+    require_once __DIR__ . '/auth.php';
+}
 
 // Check if this is an API request
 $isApiRequest = isset($_SERVER['HTTP_ACCEPT']) && strpos($_SERVER['HTTP_ACCEPT'], 'application/json') !== false;
