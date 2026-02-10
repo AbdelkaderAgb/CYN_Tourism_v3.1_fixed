@@ -122,10 +122,10 @@ include __DIR__ . '/header.php';
 
 function getTypeInfo($type) {
     $types = [
-        'voucher' => ['label' => 'Transfer Voucher', 'icon' => 'fa-ticket-alt', 'color' => '#6366f1', 'link' => 'view-transfer.php?id='],
-        'hotel_voucher' => ['label' => 'Otel Voucher', 'icon' => 'fa-hotel', 'color' => '#06b6d4', 'link' => 'view-hotel.php?id='],
-        'invoice' => ['label' => 'Fatura', 'icon' => 'fa-file-invoice-dollar', 'color' => '#22c55e', 'link' => 'view-invoice.php?id='],
-        'tour_voucher' => ['label' => 'Tur Voucher', 'icon' => 'fa-route', 'color' => '#8b5cf6', 'link' => 'view-tour.php?id='],
+        'voucher' => ['label' => 'Transfer Voucher', 'icon' => 'fa-ticket-alt', 'color' => '#4f46e5', 'link' => 'view-transfer.php?id='],
+        'hotel_voucher' => ['label' => 'Otel Voucher', 'icon' => 'fa-hotel', 'color' => '#7c3aed', 'link' => 'view-hotel.php?id='],
+        'invoice' => ['label' => 'Fatura', 'icon' => 'fa-file-invoice-dollar', 'color' => '#059669', 'link' => 'view-invoice.php?id='],
+        'tour_voucher' => ['label' => 'Tur Voucher', 'icon' => 'fa-route', 'color' => '#7c3aed', 'link' => 'view-tour.php?id='],
         'company' => ['label' => 'Sirket', 'icon' => 'fa-building', 'color' => '#64748b', 'link' => 'partners.php?search=']
     ];
     return $types[$type] ?? ['label' => 'Bilinmiyor', 'icon' => 'fa-question', 'color' => '#94a3b8', 'link' => '#'];

@@ -47,7 +47,7 @@ $currentLang = getCurrentLang();
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
                 <a href="Vcdashboard.php" class="sidebar-brand">
-                    <div style="background: white; padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
+                    <div style="background: rgba(255,255,255,0.15); padding: 4px; border-radius: 8px; display: flex; align-items: center; justify-content: center; width: 40px; height: 40px;">
                         <img src="logo.png" alt="<?php echo COMPANY_NAME; ?>" style="max-width: 100%; max-height: 100%; object-fit: contain;">
                     </div>
                     <span><?php echo COMPANY_NAME; ?></span>

@@ -291,15 +291,16 @@ include __DIR__ . '/header.php';
 </div>
 
 <style>
-.form-container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 8px; }
+.form-container { max-width: 800px; margin: 0 auto; background: var(--bg-primary); padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow); border: 1px solid var(--border-light); }
 .form-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; margin-bottom: 20px; }
 .form-group { margin-bottom: 20px; }
-.form-group label { display: block; margin-bottom: 5px; font-weight: 500; }
-.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; }
-.form-group input:focus, .form-group textarea:focus { border-color: #2196f3; outline: none; }
+.form-group label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 0.875rem; color: var(--text-primary); }
+.form-group input, .form-group textarea, .form-group select { width: 100%; padding: 10px 14px; border: 1px solid var(--border-medium); border-radius: var(--radius); font-size: 0.875rem; color: var(--text-primary); background: var(--bg-primary); transition: border-color 0.2s, box-shadow 0.2s; }
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--primary); outline: none; box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12); }
 .form-actions { display: flex; gap: 10px; margin-top: 30px; }
-.alert { padding: 15px; margin-bottom: 20px; border-radius: 4px; }
-.alert-error { background: #f8d7da; color: #721c24; }
+.alert { padding: 15px; margin-bottom: 20px; border-radius: var(--radius); }
+.alert-error { background: rgba(225, 29, 72, 0.08); color: #9f1239; border: 1px solid rgba(225, 29, 72, 0.15); }
+@media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } .form-container { padding: 20px; } }
 </style>
 
 <?php include __DIR__ . '/footer.php'; ?>

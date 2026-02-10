@@ -36,6 +36,7 @@ if (file_exists(__DIR__ . '/../Logger.php')) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500 - <?php echo htmlspecialchars($pageTitle); ?></title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -44,21 +45,21 @@ if (file_exists(__DIR__ . '/../Logger.php')) {
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #eef2ff 0%, #fef2f2 50%, #fff7ed 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #333;
+            color: #1e293b;
         }
         
         .error-container {
             background: white;
-            border-radius: 20px;
+            border-radius: 1rem;
             padding: 60px;
             text-align: center;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 12px 40px rgba(79, 70, 229, 0.1);
             max-width: 500px;
             width: 90%;
         }
@@ -66,22 +67,24 @@ if (file_exists(__DIR__ . '/../Logger.php')) {
         .error-code {
             font-size: 120px;
             font-weight: 700;
-            color: #ee5a24;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             line-height: 1;
             margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .error-title {
             font-size: 28px;
             font-weight: 600;
-            color: #333;
+            color: #1e293b;
             margin-bottom: 15px;
         }
         
         .error-message {
             font-size: 16px;
-            color: #666;
+            color: #64748b;
             margin-bottom: 30px;
             line-height: 1.6;
         }
@@ -98,33 +101,32 @@ if (file_exists(__DIR__ . '/../Logger.php')) {
             align-items: center;
             gap: 8px;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 0.5rem;
             text-decoration: none;
             font-weight: 500;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             border: none;
             cursor: pointer;
             font-size: 14px;
         }
         
         .btn-primary {
-            background: #ee5a24;
+            background: linear-gradient(135deg, #ea580c 0%, #dc2626 100%);
             color: white;
         }
         
         .btn-primary:hover {
-            background: #d94d1a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(238, 90, 36, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 8px 20px rgba(234, 88, 12, 0.3);
         }
         
         .btn-secondary {
-            background: #f3f4f6;
-            color: #333;
+            background: #f1f5f9;
+            color: #1e293b;
         }
         
         .btn-secondary:hover {
-            background: #e5e7eb;
+            background: #e2e8f0;
         }
         
         .error-icon {
@@ -135,9 +137,9 @@ if (file_exists(__DIR__ . '/../Logger.php')) {
         .support-info {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #e2e8f0;
             font-size: 14px;
-            color: #888;
+            color: #94a3b8;
         }
         
         @media (max-width: 480px) {

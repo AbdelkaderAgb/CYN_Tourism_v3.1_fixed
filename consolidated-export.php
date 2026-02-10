@@ -12,38 +12,38 @@ $id = intval($_GET['id'] ?? 0);
 $format = $_GET['format'] ?? 'pdf';
 if (!$id) { header('Location: index.php'); exit; }
 
-$data = null; $docTitle = ''; $docNumber = ''; $docColor = '#3b82f6';
+$data = null; $docTitle = ''; $docNumber = ''; $docColor = '#4f46e5';
 try {
     switch ($type) {
         case 'transfer':
             $data = Database::getInstance()->fetchOne("SELECT * FROM vouchers WHERE id = ?", [$id]);
             $docTitle = 'TRANSFER VOUCHER';
             $docNumber = $data['voucher_no'] ?? 'VC-' . str_pad($id, 4, '0', STR_PAD_LEFT);
-            $docColor = '#3b82f6';
+            $docColor = '#4f46e5';
             break;
         case 'tour':
             $data = Database::getInstance()->fetchOne("SELECT * FROM tours WHERE id = ?", [$id]);
             $docTitle = 'TOUR VOUCHER';
             $docNumber = 'TV-' . date('Ym') . '-' . str_pad($id, 4, '0', STR_PAD_LEFT);
-            $docColor = '#10b981';
+            $docColor = '#059669';
             break;
         case 'hotel':
             $data = Database::getInstance()->fetchOne("SELECT * FROM hotel_vouchers WHERE id = ?", [$id]);
             $docTitle = 'HOTEL VOUCHER';
             $docNumber = 'HV-' . date('Ym') . '-' . str_pad($id, 4, '0', STR_PAD_LEFT);
-            $docColor = '#8b5cf6';
+            $docColor = '#7c3aed';
             break;
         case 'invoice':
             $data = Database::getInstance()->fetchOne("SELECT * FROM invoices WHERE id = ?", [$id]);
             $docTitle = 'FATURA';
             $docNumber = $data['invoice_no'] ?? 'INV-' . str_pad($id, 4, '0', STR_PAD_LEFT);
-            $docColor = '#3b82f6';
+            $docColor = '#4f46e5';
             break;
         case 'receipt':
             $data = Database::getInstance()->fetchOne("SELECT * FROM receipts WHERE id = ?", [$id]);
             $docTitle = 'MAKBUZ';
             $docNumber = $data['receipt_no'] ?? 'RC-' . str_pad($id, 4, '0', STR_PAD_LEFT);
-            $docColor = '#f59e0b';
+            $docColor = '#d97706';
             break;
         default: header('Location: index.php'); exit;
     }
@@ -55,7 +55,7 @@ if ($format === 'excel') {
     header('Content-Type: application/vnd.ms-excel; charset=utf-8');
     header('Content-Disposition: attachment; filename="export_' . $docNumber . '_' . date('Y-m-d') . '.xls"');
     echo "\xEF\xBB\xBF<table border='1'>";
-    echo "<tr><th colspan='2' style='background:#1e40af;color:white;padding:10px'>" . htmlspecialchars($docTitle . ' - ' . $docNumber) . "</th></tr>";
+    echo "<tr><th colspan='2' style='background:#4f46e5;color:white;padding:10px'>" . htmlspecialchars($docTitle . ' - ' . $docNumber) . "</th></tr>";
     foreach ($data as $k => $v) {
         if (in_array($k, ['id','created_at','updated_at','deleted_at'])) continue;
         echo "<tr><td style='background:#f1f5f9;font-weight:bold;padding:8px'>" . htmlspecialchars(ucfirst(str_replace('_', ' ', $k))) . "</td>";
@@ -74,7 +74,7 @@ function xm($a, $c = null) {
     return $sym . ' ' . number_format(floatval($a), 2, '.', ',');
 }
 function xst($s) {
-    $m = ['confirmed'=>['Onaylandi','#10b981'],'pending'=>['Beklemede','#f59e0b'],'paid'=>['Odendi','#10b981'],'cancelled'=>['Iptal','#ef4444']];
+    $m = ['confirmed'=>['Onaylandi','#059669'],'pending'=>['Beklemede','#d97706'],'paid'=>['Odendi','#059669'],'cancelled'=>['Iptal','#e11d48']];
     $v = $m[$s ?? 'confirmed'] ?? $m['confirmed'];
     return '<span style="background:'.$v[1].'18;color:'.$v[1].';padding:4px 14px;border-radius:20px;font-size:11px;font-weight:600">'.$v[0].'</span>';
 }
@@ -90,25 +90,25 @@ $CW = defined('COMPANY_WEBSITE') ? COMPANY_WEBSITE : '';
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title><?php echo xh($docTitle . ' - ' . $docNumber); ?></title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-:root{--dc:<?php echo $docColor; ?>;--fb:'DM Sans',-apple-system,sans-serif;--fm:'JetBrains Mono',monospace;--ink:#0f172a;--ink2:#475569;--ink3:#94a3b8;--bg2:#f8fafc;--bd:#e2e8f0}
-*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--fb);color:var(--ink);background:#f1f5f9;line-height:1.5}
-.tb{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--ink);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 4px 20px rgba(0,0,0,.3)}.tb-i{display:flex;align-items:center;gap:12px;color:#fff}.tb-b{background:var(--dc);color:#fff;padding:4px 12px;border-radius:6px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px}.tb-i>span{font-size:14px;opacity:.7}.tb-a{display:flex;gap:8px}
-.bt{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:var(--fb);text-decoration:none;color:#fff}.bt:hover{transform:translateY(-1px);color:#fff}.bt-p{background:var(--dc)}.bt-s{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2)}.bt-k{background:0;color:rgba(255,255,255,.7);padding:8px 12px}
-.dw{max-width:210mm;margin:76px auto 40px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.08);border-radius:4px}.dp{padding:40px 48px}
-.dh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;border-bottom:2px solid var(--dc);margin-bottom:28px}.dh-l{flex:1}.cn{font-size:26px;font-weight:700;color:var(--dc);margin-bottom:4px}.cd{font-size:11px;color:var(--ink3);line-height:1.7}.cd i{width:14px;color:var(--dc);margin-right:4px}.dh-r{text-align:right}.dtl{font-size:22px;font-weight:700;letter-spacing:1px;margin-bottom:6px}.dno{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--dc);padding:4px 12px;background:var(--dc)12;border-radius:6px;display:inline-block;margin-bottom:8px}.ddt{font-size:12px;color:var(--ink3)}
+:root{--dc:<?php echo $docColor; ?>;--fb:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--fm:'JetBrains Mono',monospace;--ink:#1e293b;--ink2:#64748b;--ink3:#94a3b8;--bg2:#f8fafc;--bd:#e2e8f0}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:var(--fb);color:var(--ink);background:#f8fafc;line-height:1.6}
+.tb{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(135deg,#1e1b4b 0%,#312e81 100%);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;box-shadow:0 4px 24px rgba(30,27,75,.35)}.tb-i{display:flex;align-items:center;gap:12px;color:#fff}.tb-b{background:var(--dc);color:#fff;padding:4px 12px;border-radius:10px;font-size:12px;font-weight:600;display:inline-flex;align-items:center;gap:6px}.tb-i>span{font-size:14px;opacity:.7}.tb-a{display:flex;gap:8px}
+.bt{display:inline-flex;align-items:center;gap:8px;padding:8px 18px;border-radius:10px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:var(--fb);text-decoration:none;color:#fff}.bt:hover{transform:translateY(-1px);color:#fff}.bt-p{background:var(--dc)}.bt-s{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15)}.bt-k{background:0;color:rgba(255,255,255,.7);padding:8px 12px}
+.dw{max-width:210mm;margin:76px auto 40px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.08);border-radius:12px;border-top:4px solid var(--dc)}.dp{padding:40px 48px}
+.dh{display:flex;justify-content:space-between;align-items:flex-start;padding-bottom:24px;border-bottom:3px solid var(--dc);margin-bottom:28px}.dh-l{flex:1}.cn{font-size:24px;font-weight:700;color:var(--dc);margin-bottom:4px}.cd{font-size:11px;color:var(--ink3);line-height:1.7}.cd i{width:14px;color:var(--dc);margin-right:4px}.dh-r{text-align:right}.dtl{font-size:22px;font-weight:700;letter-spacing:1px;margin-bottom:6px}.dno{font-family:var(--fm);font-size:14px;font-weight:600;color:var(--dc);padding:4px 12px;background:var(--dc)12;border-radius:8px;display:inline-block;margin-bottom:8px}.ddt{font-size:12px;color:var(--ink3)}
 .ds{margin-bottom:28px}.st{font-size:11px;font-weight:700;color:var(--dc);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;display:flex;align-items:center;gap:8px}.st::after{content:'';flex:1;height:1px;background:var(--bd)}
-.ig{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.ic{padding:12px 16px;border-bottom:1px solid var(--bd);border-right:1px solid var(--bd)}.ic:nth-child(even){border-right:none}.ic:nth-last-child(-n+2){border-bottom:none}.ic.fw{grid-column:1/-1;border-right:none}.il{font-size:10px;font-weight:600;color:var(--ink3);text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}.iv{font-size:14px;font-weight:500}.iv.mo{font-family:var(--fm)}.iv.hi{color:var(--dc);font-weight:700}
-.rb{display:flex;align-items:center;gap:16px;background:var(--bg2);border:1px solid var(--bd);border-radius:8px;padding:16px 20px;margin-bottom:24px}.rp{flex:1}.rp .l{font-size:10px;color:var(--ink3);text-transform:uppercase;margin-bottom:4px}.rp .v{font-size:14px;font-weight:600}.ra{color:var(--dc);font-size:20px}
-.dt{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.dt th{background:var(--dc);color:#fff;padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase}.dt td{padding:10px 14px;border-bottom:1px solid var(--bd)}.dt tr:nth-child(even) td{background:var(--bg2)}.dt tr:last-child td{border-bottom:none}.tr{text-align:right;font-family:var(--fm)}
-.fs{margin-left:auto;width:280px;border:1px solid var(--bd);border-radius:8px;overflow:hidden}.sr{display:flex;justify-content:space-between;padding:10px 16px;font-size:13px;border-bottom:1px solid var(--bd)}.sr:last-child{border-bottom:none}.sr .l{color:var(--ink2)}.sr .a{font-family:var(--fm);font-weight:600}.sr.tot{background:var(--dc);color:#fff;font-weight:700;font-size:15px}
-.nb{background:var(--bg2);border:1px solid var(--bd);border-left:3px solid var(--dc);border-radius:0 8px 8px 0;padding:14px 18px;font-size:13px;color:var(--ink2);line-height:1.7}
-.df{margin-top:36px;padding-top:20px;border-top:2px solid var(--bd)}.fg{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px}.fs2 h4{font-size:10px;font-weight:700;color:var(--dc);text-transform:uppercase;margin-bottom:8px}.fs2 p{font-size:11px;color:var(--ink3);line-height:1.7}.sl{border-top:1px solid var(--ink);width:180px;margin-top:40px;padding-top:6px;font-size:10px;color:var(--ink3)}.fl{text-align:center;padding-top:16px;border-top:1px solid var(--bd);font-size:10px;color:var(--ink3);line-height:1.8}.fl .ty{color:var(--dc);font-weight:600;font-size:11px}
-.rw{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:80px;font-weight:900;color:rgba(16,185,129,.06);letter-spacing:20px;pointer-events:none}.ps{display:inline-block;border:3px solid #10b981;color:#10b981;padding:6px 20px;border-radius:8px;font-size:18px;font-weight:900;letter-spacing:3px;transform:rotate(-6deg)}
-@media print{body{background:#fff;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}.tb{display:none!important}.dw{margin:0;box-shadow:none;max-width:100%}.dp{padding:15mm 12mm}.dt th{background:var(--dc)!important;color:#fff!important}.sr.tot{background:var(--dc)!important;color:#fff!important}.ds,.ig,.rb,.dt,.fs{break-inside:avoid;page-break-inside:avoid}@page{size:A4;margin:8mm}}
-@media screen and (max-width:768px){.tb{flex-direction:column;gap:8px;padding:10px 16px}.tb-a{width:100%;justify-content:center;flex-wrap:wrap}.bt{flex:1;justify-content:center;font-size:12px;padding:8px 12px}.bt .bl{display:none}.dw{margin:120px 8px 20px;border-radius:8px}.dp{padding:24px 20px}.dh{flex-direction:column;gap:16px}.dh-r{text-align:left}.dtl{font-size:18px}.cn{font-size:20px}.ig{grid-template-columns:1fr}.ic{border-right:none!important}.rb{flex-direction:column;text-align:center}.ra{transform:rotate(90deg)}.fs{width:100%}.fg{grid-template-columns:1fr}}
+.ig{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--bd);border-radius:12px;overflow:hidden}.ic{padding:12px 16px;border-bottom:1px solid var(--bd);border-right:1px solid var(--bd)}.ic:nth-child(even){border-right:none}.ic:nth-last-child(-n+2){border-bottom:none}.ic.fw{grid-column:1/-1;border-right:none}.il{font-size:10px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.8px;margin-bottom:4px}.iv{font-size:14px;font-weight:500}.iv.mo{font-family:var(--fm)}.iv.hi{color:var(--dc);font-weight:700}
+.rb{display:flex;align-items:center;gap:16px;background:var(--bg2);border:1px solid var(--bd);border-radius:12px;padding:16px 20px;margin-bottom:24px}.rp{flex:1}.rp .l{font-size:10px;color:var(--ink3);text-transform:uppercase;margin-bottom:4px}.rp .v{font-size:14px;font-weight:600}.ra{color:var(--dc);font-size:20px}
+.dt{width:100%;border-collapse:collapse;font-size:13px;border:1px solid var(--bd);border-radius:12px;overflow:hidden}.dt th{background:var(--dc);color:#fff;padding:10px 14px;text-align:left;font-size:11px;font-weight:600;text-transform:uppercase}.dt td{padding:10px 14px;border-bottom:1px solid var(--bd)}.dt tr:nth-child(even) td{background:var(--bg2)}.dt tr:last-child td{border-bottom:none}.tr{text-align:right;font-family:var(--fm)}
+.fs{margin-left:auto;width:280px;border:1px solid var(--bd);border-radius:12px;overflow:hidden}.sr{display:flex;justify-content:space-between;padding:10px 16px;font-size:13px;border-bottom:1px solid var(--bd)}.sr:last-child{border-bottom:none}.sr .l{color:var(--ink2)}.sr .a{font-family:var(--fm);font-weight:600}.sr.tot{background:var(--dc);color:#fff;font-weight:700;font-size:15px}
+.nb{background:var(--bg2);border:1px solid var(--bd);border-left:4px solid var(--dc);border-radius:0 12px 12px 0;padding:14px 18px;font-size:13px;color:var(--ink2);line-height:1.7}
+.df{margin-top:36px;padding-top:20px;border-top:3px solid var(--bd)}.fg{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:20px}.fs2 h4{font-size:10px;font-weight:700;color:var(--dc);text-transform:uppercase;margin-bottom:8px}.fs2 p{font-size:11px;color:var(--ink3);line-height:1.7}.sl{border-top:1px solid var(--ink);width:180px;margin-top:40px;padding-top:6px;font-size:10px;color:var(--ink3)}.fl{text-align:center;padding-top:16px;border-top:1px solid var(--bd);font-size:10px;color:var(--ink3);line-height:1.8}.fl .ty{color:var(--dc);font-weight:600;font-size:11px}
+.rw{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:80px;font-weight:900;color:rgba(5,150,105,.06);letter-spacing:20px;pointer-events:none}.ps{display:inline-block;border:3px solid #059669;color:#059669;padding:6px 20px;border-radius:10px;font-size:18px;font-weight:900;letter-spacing:3px;transform:rotate(-6deg)}
+@media print{body{background:#fff;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important;color-adjust:exact!important}.tb{display:none!important}.dw{margin:0;box-shadow:none;max-width:100%;border-radius:0;border-top:4px solid var(--dc)}.dp{padding:15mm 12mm}.dt th{background:var(--dc)!important;color:#fff!important}.sr.tot{background:var(--dc)!important;color:#fff!important}.ds,.ig,.rb,.dt,.fs{break-inside:avoid;page-break-inside:avoid}@page{size:A4;margin:8mm}}
+@media screen and (max-width:768px){.tb{flex-direction:column;gap:8px;padding:10px 16px}.tb-a{width:100%;justify-content:center;flex-wrap:wrap}.bt{flex:1;justify-content:center;font-size:12px;padding:8px 12px}.bt .bl{display:none}.dw{margin:120px 8px 20px;border-radius:12px}.dp{padding:24px 20px}.dh{flex-direction:column;gap:16px}.dh-r{text-align:left}.dtl{font-size:18px}.cn{font-size:20px}.ig{grid-template-columns:1fr}.ic{border-right:none!important}.rb{flex-direction:column;text-align:center}.ra{transform:rotate(90deg)}.fs{width:100%}.fg{grid-template-columns:1fr}}
 </style></head><body>
 <div class="tb"><div class="tb-i">
 <a href="javascript:history.back()" class="bt bt-k"><i class="fas fa-arrow-left"></i></a>
@@ -232,7 +232,7 @@ $CW = defined('COMPANY_WEBSITE') ? COMPANY_WEBSITE : '';
 <div class="ty" style="font-size: 10px; margin-bottom: 4px;">CYN Tourism is certified by TURSAB (Association of Turkish Travel Agencies) under license no: 11738</div>
 <div class="ty">CYN Turizm'i tercih ettiginiz icin tesekkur ederiz.</div>
 <div>Bu belge bilgisayar ortaminda olusturulmustur. | <?php echo xh($CP); ?> | <?php echo xh($CE); ?></div>
-<div>Sayfa 1/1 | Olusturma: <?php echo date('d/m/Y H:i'); ?></div>
+<div>Powered by CYN Tourism Management System | Sayfa 1/1 | Olusturma: <?php echo date('d/m/Y H:i'); ?></div>
 </div></div>
 
 </div></div>
@@ -285,7 +285,7 @@ function sendEmail(e) {
 
 <!-- Email Modal -->
 <div id="emailModal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:1000;align-items:center;justify-content:center;padding:20px">
-<div style="background:#fff;border-radius:12px;max-width:480px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:slideUp 0.3s ease">
+<div style="background:#fff;border-radius:16px;max-width:480px;width:100%;box-shadow:0 25px 50px rgba(0,0,0,0.25);animation:slideUp 0.3s ease">
 <div style="padding:20px 24px;border-bottom:1px solid var(--bd);display:flex;align-items:center;justify-content:space-between">
 <h3 style="font-size:18px;font-weight:600;margin:0"><i class="fas fa-envelope" style="color:var(--dc);margin-right:8px"></i>Belge Gonder</h3>
 <button onclick="closeEmailModal()" style="background:none;border:none;font-size:20px;color:var(--ink3);cursor:pointer">&times;</button>
@@ -293,19 +293,19 @@ function sendEmail(e) {
 <form id="emailForm" onsubmit="sendEmail(event)" style="padding:24px">
 <div style="margin-bottom:16px">
 <label style="display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:6px">Alici Email *</label>
-<input type="email" id="emailTo" name="email_to" required style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px" placeholder="ornek@email.com">
+<input type="email" id="emailTo" name="email_to" required style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:10px;font-size:14px;font-family:var(--fb)" placeholder="ornek@email.com">
 </div>
 <div style="margin-bottom:16px">
 <label style="display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:6px">Konu</label>
-<input type="text" name="subject" style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px" value="<?php echo xh($docTitle . ' - ' . $docNumber); ?>">
+<input type="text" name="subject" style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:10px;font-size:14px;font-family:var(--fb)" value="<?php echo xh($docTitle . ' - ' . $docNumber); ?>">
 </div>
 <div style="margin-bottom:20px">
 <label style="display:block;font-size:13px;font-weight:600;color:var(--ink2);margin-bottom:6px">Mesaj (Opsiyonel)</label>
-<textarea name="message" rows="3" style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px;resize:vertical" placeholder="Ek bir mesaj yazabilirsiniz..."></textarea>
+<textarea name="message" rows="3" style="width:100%;padding:10px 14px;border:1px solid var(--bd);border-radius:10px;font-size:14px;resize:vertical;font-family:var(--fb)" placeholder="Ek bir mesaj yazabilirsiniz..."></textarea>
 </div>
 <div style="display:flex;gap:12px;justify-content:flex-end">
-<button type="button" onclick="closeEmailModal()" style="padding:10px 20px;border:1px solid var(--bd);border-radius:8px;font-size:14px;font-weight:500;cursor:pointer;background:#fff">Iptal</button>
-<button type="submit" id="sendBtn" style="padding:10px 20px;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;background:var(--dc);color:#fff"><i class="fas fa-paper-plane"></i> Gonder</button>
+<button type="button" onclick="closeEmailModal()" style="padding:10px 20px;border:1px solid var(--bd);border-radius:10px;font-size:14px;font-weight:500;cursor:pointer;background:#fff;font-family:var(--fb)">Iptal</button>
+<button type="submit" id="sendBtn" style="padding:10px 20px;border:none;border-radius:10px;font-size:14px;font-weight:600;cursor:pointer;background:var(--dc);color:#fff;font-family:var(--fb)"><i class="fas fa-paper-plane"></i> Gonder</button>
 </div>
 </form>
 </div>
