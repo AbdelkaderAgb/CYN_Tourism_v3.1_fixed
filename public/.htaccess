@@ -1,0 +1,19 @@
+# CYN Tourism - URL Rewriting for MVC Router
+# Compatible with Namecheap Shared Hosting (cPanel / Apache)
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # Skip existing files and directories
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Route everything else to the front controller
+    RewriteRule ^(.*)$ index.php [QSA,L]
+</IfModule>
+
+# Prevent direct access to sensitive files
+<FilesMatch "\.(env|log|sql|sqlite)$">
+    Require all denied
+</FilesMatch>
