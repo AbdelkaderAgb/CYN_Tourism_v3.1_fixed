@@ -72,6 +72,7 @@ $currentLang = getCurrentLang();
         body {
             background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -79,12 +80,17 @@ $currentLang = getCurrentLang();
         }
         .login-container { width: 100%; max-width: 420px; }
         .login-logo {
-            width: 64px; height: 64px;
+            width: 72px; height: 72px;
             background: var(--primary-gradient);
             border-radius: var(--radius-lg);
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px; color: #fff; font-size: 28px;
+            margin: 0 auto var(--space-4); color: #fff; font-size: 28px;
             box-shadow: var(--shadow-lg);
+        }
+        .login-header { text-align: center; margin-bottom: var(--space-6); }
+        @media (max-width: 480px) {
+            .login-container .card { padding: var(--space-5) !important; }
+            .login-logo { width: 56px; height: 56px; font-size: 22px; }
         }
     </style>
 </head>
